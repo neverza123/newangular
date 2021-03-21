@@ -1,0 +1,59 @@
+
+<div class="float-right">
+<button class="btn btn-primary" (click)="addProduct(products)">Add Product</button> </div>
+<div >
+    <table datatable [dtOptions]="dtOptions" class="table table-striped">
+      <thead>
+        <tr style="background-color:#157DEC">
+          <th style="text-align:center">No.</th>
+          <th style="text-align:center">Picture</th>
+          <th style="text-align:center">Reference</th>
+          <th style="text-align:center">Balance</th>
+          <th style="text-align:center">Manage</th>
+
+
+
+        </tr>
+      </thead>
+      <tbody *ngIf="products?.length != 0">
+        <tr *ngFor="let product of products" >
+          <td style="text-align:center">{{ product.id }}</td>
+          <td></td>
+          <td style="tex-align:left" ><b>Reference : </b>{{ product.reference }} <BR> <b>Description : </b>{{ product.description }}<BR><b> Brand : </b> {{ product.brand }}</td>
+
+
+          <td style="text-align:center">{{ product.qty }}</td>
+          <td style="text-align:center"><button class="btn btn-primary" (click)="changeProduct(product)">Edit </button> &nbsp;
+            <button class="btn btn-danger " (click)="deleteProduct(product)">Delete</button></td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="products?.length == 0">
+        <tr>
+          <td colspan="3" class="no-data-available">No data!</td>
+        </tr>
+      </tbody>
+
+
+    </table>
+
+<div *ngIf="table == 'edit'">
+    <form [formGroup]="editForm" (ngSubmit)="editSubmit()" >
+      <input type="text" formControlName="id" placeholder="ID">
+      <input type="text" formControlName="reference" placeholder="reference">
+      <input type="text" formControlName="description" placeholder="description">
+      <input type="text" formControlName="brand" placeholder="brand">
+      <input type="text" formControlName="qty" placeholder="qty">
+      <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+
+    </div>
+    <div *ngIf="table == 'add'">
+      <form [formGroup]="addForm" (ngSubmit)="addSubmit()" >
+        <input type="text" formControlName="reference" placeholder="reference">
+        <input type="text" formControlName="description" placeholder="description">
+        <input type="text" formControlName="brand" placeholder="brand">
+        <input type="text" formControlName="qty" placeholder="qty">
+        <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>
+
